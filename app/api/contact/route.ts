@@ -7,7 +7,9 @@ export async function POST(req: Request) {
   try {
     const { name, email, role, message } = await req.json();
 
-    const { error } = await resend.emails.send({
+    console.log("API Key exists:", !!process.env.RESEND_API_KEY);
+
+    const result = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: "carpilone.contact@gmail.com",
       subject: `New Contact Form (${role})`,
@@ -22,22 +24,32 @@ export async function POST(req: Request) {
       `,
     });
 
-    if (error) {
-      console.error(error);
+    console.log("Resend response:", result);
+
+    if (result.error) {
+      console.error("RESEND ERROR:", result.error);
 
       return NextResponse.json(
-        { error: error.message ?? JSON.stringify(error) },
+        {
+          error: result.error,
+        },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+      data: result.data,
+    });
   } catch (err) {
-    console.error(err);
+    console.error("SERVER ERROR:", err);
 
     return NextResponse.json(
       {
-        error: err instanceof Error ? err.message : "Something went wrong.",
+        error:
+          err instanceof Error
+            ? err.message
+            : JSON.stringify(err, null, 2),
       },
       { status: 500 }
     );
