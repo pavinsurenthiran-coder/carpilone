@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    console.log("API ROUTE HIT");
+    console.log("🔥 API ROUTE HIT");
     console.log("API KEY EXISTS:", !!process.env.RESEND_API_KEY);
 
     const { name, email, role, message } = await req.json();
