@@ -29,6 +29,8 @@ export default function Contact() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    console.log("CLICKED"); // 👈 THIS IS THE TEST LINE
+
     setSuccess("");
     setError("");
 
