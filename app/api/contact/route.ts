@@ -3,9 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, role, message } = await req.json();
+    console.log("API ROUTE HIT");
+    console.log("API KEY EXISTS:", !!process.env.RESEND_API_KEY);
 
-    console.log("API Key exists:", !!process.env.RESEND_API_KEY);
+    const { name, email, role, message } = await req.json();
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -24,7 +25,7 @@ export async function POST(req: Request) {
       `,
     });
 
-    console.log("Resend response:", result);
+    console.log("RESEND RESULT:", result);
 
     return NextResponse.json({
       success: true,
