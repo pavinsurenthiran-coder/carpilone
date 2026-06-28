@@ -8,6 +8,10 @@ export async function POST(req: Request) {
 
     const { name, email, role, message } = await req.json();
 
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error("Missing RESEND_API_KEY");
+    }
+
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const result = await resend.emails.send({
