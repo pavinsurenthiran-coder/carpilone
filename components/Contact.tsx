@@ -29,7 +29,7 @@ export default function Contact() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log("CLICKED"); // 👈 THIS IS THE TEST LINE
+    console.log("CLICKED"); // ✅ TEST LINE
 
     setSuccess("");
     setError("");
@@ -130,8 +130,7 @@ export default function Contact() {
             </div>
 
             <div className="text-white mt-2">
-              Toronto · Calgary · Vancouver · Ottawa · Edmonton · Halifax ·
-              Montréal
+              Toronto · Calgary · Vancouver · Ottawa · Edmonton · Halifax · Montréal
             </div>
           </div>
         </div>
@@ -207,18 +206,6 @@ export default function Contact() {
               className="mt-2 w-full border border-navy-900/15 bg-slate-50 px-4 py-3 text-navy-900 placeholder:text-slate-400 focus:outline-none focus:border-gold-500 resize-none"
             />
           </label>
-
-          {success && (
-            <div className="mt-5 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
-              {success}
-            </div>
-          )}
-
-          {error && (
-            <div className="mt-5 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-              {error}
-            </div>
-          )}
 
           <button
             type="submit"
